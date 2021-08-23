@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "helm-test-ai.fullname" . }}
+  labels:
+    {{- include "helm-test-ai.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 5005
+      protocol: TCP
+      name: facemask2
+  selector:
+    {{- include "helm-test-ai.selectorLabels" . | nindent 4 }}
